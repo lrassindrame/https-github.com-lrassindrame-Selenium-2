@@ -14,6 +14,7 @@ public class LoginPage extends PageBase{
         super(driver);
     }
 
+    //Fill simple form and send (eg. Login)
     public UserPage login(String username, String password){
         WebElement usernameElement = waitAndReturnElement(usernameLocator);
         usernameElement.sendKeys(username);

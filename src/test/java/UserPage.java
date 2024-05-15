@@ -13,5 +13,5 @@ public class UserPage extends PageBase{
         WebElement usernameElement = waitAndReturnElement(usernameLocator);
         return usernameElement.getText();
     }
-    
+ 
 }

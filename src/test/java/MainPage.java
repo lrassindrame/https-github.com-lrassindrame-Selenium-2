@@ -13,7 +13,7 @@ import org.openqa.selenium.NoSuchElementException;
 
 class MainPage extends PageBase {
     private By loginPageLocator = By.xpath("//*[@id=\"__next\"]/div/header/nav/ul[2]/li[1]/a");
-
+    private final By toStatsPageLocator = By.xpath("//*[@id=\"__next\"]/div/header/nav/ul[1]/li[2]/a");
 
     
     public MainPage(WebDriver driver) {
@@ -26,5 +26,11 @@ class MainPage extends PageBase {
         loginPage.click();
         return new LoginPage(this.driver);
     }
-    
+
+    public StatsPage toStatsPage(){
+        WebElement statsElement = waitAndReturnElement(toStatsPageLocator);
+        statsElement.click();
+        return new StatsPage(driver);
+    }
+
 }
