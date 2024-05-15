@@ -40,7 +40,7 @@ public class SeleniumTest {
 
     @Test
     //Fill simple form and send (eg. Login)
-    public void loginFail(){
+    public void testLoginFail(){
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = mainPage.toLoginPage();
         UserPage userPage = loginPage.login("wrong", "wrong");
@@ -49,10 +49,21 @@ public class SeleniumTest {
 
     @Test
     //Fill input (select)
-    public void getTopPlayingGamePS42024(){
+    public void testGetTopPlayingGamePS42024(){
         MainPage mainPage = new MainPage(driver);
         StatsPage statsPage = mainPage.toStatsPage();
         assertEquals(statsPage.topPlayingPS42024(), "Persona 3 Reload");
+    }
+
+    @Test 
+    //logout
+    public void testLogout(){
+        MainPage mainPage = new MainPage(driver);
+        LoginPage loginPage = mainPage.toLoginPage();
+        UserPage userPage = loginPage.login("Selenium2", "Selenium2");
+        mainPage = userPage.logout();
+        //Checking the return to the main page after logout
+        assertEquals(mainPage.getTitle(), "HowLongToBeat: The Game");
     }
 
     @After

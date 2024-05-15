@@ -14,12 +14,18 @@ import org.openqa.selenium.NoSuchElementException;
 class MainPage extends PageBase {
     private By loginPageLocator = By.xpath("//*[@id=\"__next\"]/div/header/nav/ul[2]/li[1]/a");
     private final By toStatsPageLocator = By.xpath("//*[@id=\"__next\"]/div/header/nav/ul[1]/li[2]/a");
+    private final By titleLocator = By.xpath("//*[@id=\"__next\"]/div/main/div/div[1]/div/div/div/h2");
 
     
     public MainPage(WebDriver driver) {
         super(driver);
         this.driver.get("https://howlongtobeat.com/");
     }    
+
+    public String getTitle(){
+        WebElement titleElement = waitAndReturnElement(titleLocator);
+        return titleElement.getText();
+    }
 
     public LoginPage toLoginPage(){
         WebElement loginPage = waitAndReturnElement(loginPageLocator);
