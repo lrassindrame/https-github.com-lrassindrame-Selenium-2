@@ -14,7 +14,7 @@ import org.openqa.selenium.NoSuchElementException;
 class PageBase {
     protected WebDriver driver;
     protected WebDriverWait wait;
-    
+    private By bodyElementLocator = By.tagName("body");
     
     public PageBase(WebDriver driver) {
         this.driver = driver;

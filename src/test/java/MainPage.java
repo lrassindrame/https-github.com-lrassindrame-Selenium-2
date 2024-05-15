@@ -12,24 +12,19 @@ import org.openqa.selenium.NoSuchElementException;
 
 
 class MainPage extends PageBase {
+    private By loginPageLocator = By.xpath("//*[@id=\"__next\"]/div/header/nav/ul[2]/li[1]/a");
 
-    private By footerBy = By.className("footer-block");
-    private By searchBarTogglerBy = By.xpath("//a[@class='search-bar-toggler']/i");
-    private By searchBarBy = By.name("search");
+
     
     public MainPage(WebDriver driver) {
         super(driver);
-        this.driver.get("https://www.inf.elte.hu/en/");
+        this.driver.get("https://howlongtobeat.com/");
     }    
-    
-    public String getFooterText() {
-        return this.waitAndReturnElement(footerBy).getText();
+
+    public LoginPage toLoginPage(){
+        WebElement loginPage = waitAndReturnElement(loginPageLocator);
+        loginPage.click();
+        return new LoginPage(this.driver);
     }
     
-    public SearchResultPage search(String searchQuery) {
-        this.waitAndReturnElement(searchBarTogglerBy).click();
-        
-        this.waitAndReturnElement(searchBarBy).sendKeys(searchQuery + "\n");
-        return new SearchResultPage(this.driver);
-    }
 }

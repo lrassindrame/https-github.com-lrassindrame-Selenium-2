@@ -13,10 +13,13 @@ import org.openqa.selenium.NoSuchElementException;
 import java.util.*;  
 
 import java.net.URL;
+
+import static org.junit.Assert.assertEquals;
+
 import java.net.MalformedURLException;
 
 
-public class FirstSeleniumTest {
+public class SeleniumTest {
     public WebDriver driver;
     
     @Before
@@ -25,32 +28,23 @@ public class FirstSeleniumTest {
         driver = new RemoteWebDriver(new URL("http://selenium:4444/wd/hub"), options);
         driver.manage().window().maximize();
     }
-    
-    @Test
-    public void testSearch() {
-        MainPage mainPage = new MainPage(this.driver);
-        Assert.assertTrue(mainPage.getFooterText().contains("2021 ELTE Faculty of Informatics"));
 
-        SearchResultPage searchResultPage = mainPage.search("Students");
-        String bodyText = searchResultPage.getBodyText();
-        System.out.println(bodyText);
-        Assert.assertTrue(bodyText.contains("FOUND"));
-        Assert.assertTrue(bodyText.contains("Current Students"));
-    }
-    
     @Test
-    public void testSearch2() {
-        String[] searchQueries={"something","","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"};  
-        for(String searchQuery : searchQueries) {  
-            MainPage mainPage = new MainPage(this.driver);
-            SearchResultPage searchResultPage = mainPage.search(searchQuery);
-            String bodyText = searchResultPage.getBodyText();
-            Assert.assertTrue(bodyText.contains("FOUND"));
-        }  
+    public void loginSuccess(){
+        MainPage mainPage = new MainPage(driver);
+        LoginPage loginPage = mainPage.toLoginPage();
+        UserPage userPage = loginPage.login("Selenium2", "Selenium2");
+        assertEquals(userPage.getUserName(), "Selenium2");
     }
-    
 
-    
+    @Test
+    public void loginFail(){
+        MainPage mainPage = new MainPage(driver);
+        LoginPage loginPage = mainPage.toLoginPage();
+        UserPage userPage = loginPage.login("wrong", "wrong");
+        assertEquals(userPage, null);
+    }
+
     @After
     public void close() {
         if (driver != null) {
