@@ -30,6 +30,13 @@ public class SeleniumTest {
     }
 
     @Test
+    //Static Page test
+    public void testStaticPage(){
+        MainPage mainPage = new MainPage(driver);
+        assertTrue(mainPage.getTitle().contains("HowLongToBeat: The Game"));
+    }
+
+    @Test
     //Fill simple form and send (eg. Login)
     public void loginSuccess(){
         MainPage mainPage = new MainPage(driver);
@@ -80,6 +87,19 @@ public class SeleniumTest {
         //Sending the reply and verifying its presence in the latest reply
         FirstTopicForumPage firstTopicForumPage2 = createReplyPage.sendReply("send a test reply");
         assertTrue(firstTopicForumPage2.getLastReply().contains("send a test reply"));
+    }
+
+    @Test
+    //Send a form (user option change)
+    public void testChangeUserOption(){
+        MainPage mainPage = new MainPage(driver);
+        LoginPage loginPage = mainPage.toLoginPage();
+        UserPage userPage = loginPage.login("Selenium2", "Selenium2");
+        UserOptionPage userOptionPage = userPage.toOptionPage();
+        //Change a user option and verify that it is applied correctly
+        UserOptionPage userOptionPage2 = userOptionPage.selectMale();
+        UserPage userPage2 = userOptionPage2.toUserPage();
+        assertTrue(userPage2.getGenderInfo().contains("Male"));
     }
 
     @After
