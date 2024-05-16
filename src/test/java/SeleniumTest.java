@@ -37,6 +37,11 @@ public class SeleniumTest {
     }
 
     @Test
+    public void testMultiplePage(){
+        
+    }
+
+    @Test
     //Fill simple form and send (eg. Login)
     public void loginSuccess(){
         MainPage mainPage = new MainPage(driver);
@@ -90,7 +95,7 @@ public class SeleniumTest {
     }
 
     @Test
-    //Send a form (user option change)
+    //Send a form (user option change, filling radio button)
     public void testChangeUserOption(){
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = mainPage.toLoginPage();

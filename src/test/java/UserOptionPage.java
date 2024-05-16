@@ -17,7 +17,7 @@ public class UserOptionPage extends PageBase{
         return new UserPage(driver);
     }
 
-    //Send a form (user option change)
+    //Send a form (user option change, filling radio button)
     public UserOptionPage selectMale(){
         WebElement checkBoxElement = waitAndReturnElement(checkBoxMaleLocator);
         checkBoxElement.click();
