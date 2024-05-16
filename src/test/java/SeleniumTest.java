@@ -5,6 +5,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import pages.AllTopicForumPage;
+import pages.CreateReplyPage;
+import pages.FirstTopicForumPage;
+import pages.ForumPage;
+import pages.LoginPage;
+import pages.MainPage;
+import pages.StatsPage;
+import pages.UserOptionPage;
+import pages.UserPage;
+
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -36,7 +47,7 @@ public class SeleniumTest {
     //Static Page test and Reading the page title
     public void testStaticPage(){
         MainPage mainPage = new MainPage(driver);
-        assertTrue(mainPage.driver.getTitle().contains("HowLongToBeat.com | Game Lengths, Backlogs and more!"));
+        assertTrue(mainPage.getTitle().contains("HowLongToBeat.com | Game Lengths, Backlogs and more!"));
     }
 
     @Test
@@ -88,7 +99,7 @@ public class SeleniumTest {
         UserPage userPage = loginPage.login("Selenium2", "Selenium2");
         mainPage = userPage.logout();
         //Checking the return to the main page after logout
-        assertTrue(mainPage.driver.getTitle().contains("HowLongToBeat.com | Game Lengths, Backlogs and more!"));
+        assertTrue(mainPage.getTitle().contains("HowLongToBeat.com | Game Lengths, Backlogs and more!"));
     }
 
     @Test 

@@ -1,7 +1,10 @@
+package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+
+import base.PageBase;
 
 public class StatsPage extends PageBase{
     private final By selectPlatformLocator = By.xpath("//*[@id=\"__next\"]/div/main/div/div[2]/div[1]/div[1]/select");

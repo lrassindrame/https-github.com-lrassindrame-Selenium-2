@@ -1,6 +1,9 @@
+package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import base.PageBase;
 
 public class CreateReplyPage extends PageBase{
     private final By inputReplyLocator = By.xpath("//*[@id=\"__next\"]/div/main/div[2]/div/div[1]/div/form/fieldset[1]/textarea");

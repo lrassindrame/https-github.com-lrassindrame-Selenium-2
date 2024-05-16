@@ -1,3 +1,4 @@
+package base;
 import org.junit.*;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
 
-class PageBase {
+public class PageBase {
     protected WebDriver driver;
     protected WebDriverWait wait;
     private By bodyElementLocator = By.tagName("body");
@@ -30,6 +31,10 @@ class PageBase {
     public String getBodyText() {
         WebElement bodyElement = this.waitAndReturnElement(By.tagName("body"));
         return bodyElement.getText();
+    }
+
+    public String getTitle(){
+        return this.driver.getTitle();
     }
    
 }

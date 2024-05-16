@@ -1,6 +1,9 @@
+package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import base.PageBase;
 
 public class UserOptionPage extends PageBase{
     private final By profilButtonLocator = By.xpath("//*[@id=\"__next\"]/div/main/form/div[1]/div/div/div[2]/div/ul/li[1]/a");
