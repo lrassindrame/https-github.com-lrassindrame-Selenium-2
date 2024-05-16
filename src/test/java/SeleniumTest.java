@@ -81,9 +81,7 @@ public class SeleniumTest {
     @Test
     //Fill simple form and send (eg. Login)
     public void loginSuccess(){
-        MainPage mainPage = new MainPage(driver);
-        LoginPage loginPage = mainPage.toLoginPage();
-        UserPage userPage = loginPage.login("Selenium2", "Selenium2");
+        UserPage userPage = loginAndOpenUserPage();
         assertEquals(userPage.getUserName(), "Selenium2");
     }
 
@@ -107,10 +105,8 @@ public class SeleniumTest {
     @Test 
     //logout
     public void testLogout(){
-        MainPage mainPage = new MainPage(driver);
-        LoginPage loginPage = mainPage.toLoginPage();
-        UserPage userPage = loginPage.login("Selenium2", "Selenium2");
-        mainPage = userPage.logout();
+        UserPage userPage = loginAndOpenUserPage();
+        MainPage mainPage = userPage.logout();
         //Checking the return to the main page after logout
         assertTrue(mainPage.getTitle().contains("HowLongToBeat.com | Game Lengths, Backlogs and more!"));
     }
@@ -119,9 +115,7 @@ public class SeleniumTest {
     //Form sending with user (reply to a forum)
     public void testReplyForumWithUser(){
         //Access to the page to reply to a forum
-        MainPage mainPage = new MainPage(driver);
-        LoginPage loginPage = mainPage.toLoginPage();
-        UserPage userPage = loginPage.login("Selenium2", "Selenium2");
+        UserPage userPage = loginAndOpenUserPage();
         ForumPage forumPage = userPage.toForumPage();
         AllTopicForumPage allTopicForumPage = forumPage.toAlltopicsPage();
         FirstTopicForumPage firstTopicForumPage = allTopicForumPage.toFirstTopicForumPage();
@@ -134,9 +128,7 @@ public class SeleniumTest {
     @Test
     //Send a form (user option change, filling radio button)
     public void testChangeUserOption(){
-        MainPage mainPage = new MainPage(driver);
-        LoginPage loginPage = mainPage.toLoginPage();
-        UserPage userPage = loginPage.login("Selenium2", "Selenium2");
+        UserPage userPage = loginAndOpenUserPage();
         UserOptionPage userOptionPage = userPage.toOptionPage();
         //Change a user option and verify that it is applied correctly
         UserOptionPage userOptionPage2 = userOptionPage.selectMale();
@@ -152,11 +144,17 @@ public class SeleniumTest {
     }
 
     
-
     public void setupSmallWindowSize()  throws MalformedURLException  {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--window-size=800,600");
         driver = new RemoteWebDriver(new URL("http://selenium:4444/wd/hub"), options);
         driver.manage().window().maximize();
+    }
+
+    public UserPage loginAndOpenUserPage(){
+        MainPage mainPage = new MainPage(driver);
+        LoginPage loginPage = mainPage.toLoginPage();
+        UserPage userPage = loginPage.login("Selenium2", "Selenium2");
+        return userPage;
     }
 }
