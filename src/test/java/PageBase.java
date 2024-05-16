@@ -22,6 +22,7 @@ class PageBase {
     }
     
     protected WebElement waitAndReturnElement(By locator) {
+        //explicit wait
         this.wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         return this.driver.findElement(locator);
     } 
