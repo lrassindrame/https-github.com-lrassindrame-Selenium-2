@@ -6,7 +6,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import net.sourceforge.htmlunit.corejs.javascript.tools.debugger.Main;
 import pages.AllTopicForumPage;
 import pages.CreateReplyPage;
 import pages.FirstTopicForumPage;
@@ -40,6 +39,7 @@ public class SeleniumTest {
     @Before
     public void setup()  throws MalformedURLException  {
         ChromeOptions options = new ChromeOptions();
+        options.addArguments("--delete-cookies");
         driver = new RemoteWebDriver(new URL("http://selenium:4444/wd/hub"), options);
         driver.manage().window().maximize();
     }
@@ -47,7 +47,7 @@ public class SeleniumTest {
     @Test
     //Static Page test and Reading the page title
     public void testStaticPage(){
-        MainPage mainPage = MainPageWithoutCookie();
+        MainPage mainPage = new MainPage(driver);
         assertTrue(mainPage.getTitle().contains("HowLongToBeat.com | Game Lengths, Backlogs and more!"));
     }
 
@@ -57,7 +57,7 @@ public class SeleniumTest {
         //Closing the default driver to open one with a small window
         close();
         setupSmallWindowSize();
-        MainPage mainPage = MainPageWithoutCookie();
+        MainPage mainPage = new MainPage(driver);
         assertTrue(mainPage.getTitle().contains("HowLongToBeat.com | Game Lengths, Backlogs and more!"));
         //Reopening the default driver
         close();
@@ -89,7 +89,7 @@ public class SeleniumTest {
     @Test
     //Fill simple form and send (eg. Login)
     public void testLoginFail(){
-        MainPage mainPage = MainPageWithoutCookie();
+        MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = mainPage.toLoginPage();
         UserPage userPage = loginPage.login("wrong", "wrong");
         assertEquals(userPage, null);
@@ -98,7 +98,7 @@ public class SeleniumTest {
     @Test
     //Fill input (select) / Filling and reading drop-down
     public void testGetTopPlayingGamePS42024(){
-        MainPage mainPage = MainPageWithoutCookie();
+        MainPage mainPage = new MainPage(driver);
         StatsPage statsPage = mainPage.toStatsPage();
         assertTrue(statsPage.topPlayingPS42024().contains("Persona 3 Reload"));
     }
@@ -152,19 +152,10 @@ public class SeleniumTest {
         driver.manage().window().maximize();
     }
 
-    //To avoid code repetition
     public UserPage loginAndOpenUserPage(){
-        MainPage mainPage = MainPageWithoutCookie();
+        MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = mainPage.toLoginPage();
         UserPage userPage = loginPage.login("Selenium2", "Selenium2");
         return userPage;
-    }
-
-    //consent popup without clicking onto it
-    public MainPage MainPageWithoutCookie(){
-        MainPage mainPage = new MainPage(driver);
-        WebDriverWait wait = new WebDriverWait(driver, 2);
-        driver.manage().getCookies();
-        return mainPage;
     }
 }
