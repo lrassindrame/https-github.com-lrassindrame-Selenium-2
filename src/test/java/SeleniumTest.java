@@ -66,6 +66,22 @@ public class SeleniumTest {
         assertTrue(mainPage.getTitle().contains("HowLongToBeat: The Game"));
     }
 
+    @Test 
+    //Form sending with user (reply to a forum)
+    public void testReplyForumWithUser(){
+        //Access to the page to reply to a forum
+        MainPage mainPage = new MainPage(driver);
+        LoginPage loginPage = mainPage.toLoginPage();
+        UserPage userPage = loginPage.login("Selenium2", "Selenium2");
+        ForumPage forumPage = userPage.toForumPage();
+        AllTopicForumPage allTopicForumPage = forumPage.toAlltopicsPage();
+        FirstTopicForumPage firstTopicForumPage = allTopicForumPage.toFirstTopicForumPage();
+        CreateReplyPage createReplyPage = firstTopicForumPage.toCreateReplyPage();
+        //Sending the reply and verifying its presence in the latest reply
+        FirstTopicForumPage firstTopicForumPage2 = createReplyPage.sendReply("send a test reply");
+        assertTrue(firstTopicForumPage2.getLastReply().contains("send a test reply"));
+    }
+
     @After
     public void close() {
         if (driver != null) {
