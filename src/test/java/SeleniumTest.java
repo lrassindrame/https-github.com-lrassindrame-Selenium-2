@@ -51,6 +51,19 @@ public class SeleniumTest {
     }
 
     @Test
+    // test WebDriver configuration (with small window)
+    public void testSmallWindowSize() throws MalformedURLException{
+        //Closing the default driver to open one with a small window
+        close();
+        setupSmallWindowSize();
+        MainPage mainPage = new MainPage(driver);
+        assertTrue(mainPage.getTitle().contains("HowLongToBeat.com | Game Lengths, Backlogs and more!"));
+        //Reopening the default driver
+        close();
+        setup();
+    }
+
+    @Test
     //Multiple page test with map and reading the pages title
     public void testMultiplePage(){
         Map<String, String> urlTitleMap = new HashMap<>();
@@ -136,5 +149,14 @@ public class SeleniumTest {
         if (driver != null) {
             driver.quit();
         }
+    }
+
+    
+
+    public void setupSmallWindowSize()  throws MalformedURLException  {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--window-size=800,600");
+        driver = new RemoteWebDriver(new URL("http://selenium:4444/wd/hub"), options);
+        driver.manage().window().maximize();
     }
 }
