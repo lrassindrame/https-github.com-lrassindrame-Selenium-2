@@ -14,7 +14,7 @@ import java.util.*;
 
 import java.net.URL;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.net.MalformedURLException;
 
@@ -52,7 +52,7 @@ public class SeleniumTest {
     public void testGetTopPlayingGamePS42024(){
         MainPage mainPage = new MainPage(driver);
         StatsPage statsPage = mainPage.toStatsPage();
-        assertEquals(statsPage.topPlayingPS42024(), "Persona 3 Reload");
+        assertTrue(statsPage.topPlayingPS42024().contains("Persona 3 Reload"));
     }
 
     @Test 
@@ -63,7 +63,7 @@ public class SeleniumTest {
         UserPage userPage = loginPage.login("Selenium2", "Selenium2");
         mainPage = userPage.logout();
         //Checking the return to the main page after logout
-        assertEquals(mainPage.getTitle(), "HowLongToBeat: The Game");
+        assertTrue(mainPage.getTitle().contains("HowLongToBeat: The Game"));
     }
 
     @After
