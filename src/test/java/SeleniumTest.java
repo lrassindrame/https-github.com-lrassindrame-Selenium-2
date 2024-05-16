@@ -18,6 +18,9 @@ import static org.junit.Assert.*;
 
 import java.net.MalformedURLException;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class SeleniumTest {
     public WebDriver driver;
@@ -30,15 +33,25 @@ public class SeleniumTest {
     }
 
     @Test
-    //Static Page test
+    //Static Page test and Reading the page title
     public void testStaticPage(){
         MainPage mainPage = new MainPage(driver);
-        assertTrue(mainPage.getTitle().contains("HowLongToBeat: The Game"));
+        assertTrue(mainPage.driver.getTitle().contains("HowLongToBeat.com | Game Lengths, Backlogs and more!"));
     }
 
     @Test
+    //Multiple page test with map and reading the pages title
     public void testMultiplePage(){
+        Map<String, String> urlTitleMap = new HashMap<>();
+
+        urlTitleMap.put("https://howlongtobeat.com/", "HowLongToBeat.com | Game Lengths, Backlogs and more!");
+        urlTitleMap.put("https://howlongtobeat.com/game/68033", "How long is Baldur's Gate 3? | HowLongToBeat");
+        urlTitleMap.put("https://howlongtobeat.com/feedback", "Site Feedback | HowLongToBeat");
         
+        for (Map.Entry<String, String> urlTitle : urlTitleMap.entrySet()) {
+            driver.get(urlTitle.getKey());
+            assertTrue(driver.getTitle().contains(urlTitle.getValue()));
+        }
     }
 
     @Test
@@ -75,7 +88,7 @@ public class SeleniumTest {
         UserPage userPage = loginPage.login("Selenium2", "Selenium2");
         mainPage = userPage.logout();
         //Checking the return to the main page after logout
-        assertTrue(mainPage.getTitle().contains("HowLongToBeat: The Game"));
+        assertTrue(mainPage.driver.getTitle().contains("HowLongToBeat.com | Game Lengths, Backlogs and more!"));
     }
 
     @Test 
