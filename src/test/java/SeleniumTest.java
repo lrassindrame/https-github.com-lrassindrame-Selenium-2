@@ -47,7 +47,7 @@ public class SeleniumTest {
         urlTitleMap.put("https://howlongtobeat.com/", "HowLongToBeat.com | Game Lengths, Backlogs and more!");
         urlTitleMap.put("https://howlongtobeat.com/game/68033", "How long is Baldur's Gate 3? | HowLongToBeat");
         urlTitleMap.put("https://howlongtobeat.com/feedback", "Site Feedback | HowLongToBeat");
-        
+
         for (Map.Entry<String, String> urlTitle : urlTitleMap.entrySet()) {
             driver.get(urlTitle.getKey());
             assertTrue(driver.getTitle().contains(urlTitle.getValue()));
@@ -73,7 +73,7 @@ public class SeleniumTest {
     }
 
     @Test
-    //Fill input (select)
+    //Fill input (select) / Filling and reading drop-down
     public void testGetTopPlayingGamePS42024(){
         MainPage mainPage = new MainPage(driver);
         StatsPage statsPage = mainPage.toStatsPage();

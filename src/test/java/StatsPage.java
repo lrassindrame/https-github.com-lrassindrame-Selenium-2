@@ -13,7 +13,7 @@ public class StatsPage extends PageBase{
         super(driver);
     }
     
-    //Fill input (select)
+    //Fill input (select) / Filling and reading drop-down
     public String topPlayingPS42024(){
         WebElement selectPlatformElement = waitAndReturnElement(selectPlatformLocator);
         Select select = new Select(selectPlatformElement);
