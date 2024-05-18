@@ -144,6 +144,14 @@ public class SeleniumTest {
         assertNotEquals(mainPage.buttonBackground(), mainPage.buttonHoverBackground());
     }
 
+    @Test
+    // test File Upload
+    public void testUpload(){
+        UserPage userPage = loginAndOpenUserPage();
+        UserOptionPage userOptionPage = userPage.toOptionPage();
+        assertNotEquals(userOptionPage.uploadAvatar(), null);
+    }
+
     @After
     public void close() {
         if (driver != null) {
