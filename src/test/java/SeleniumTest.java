@@ -129,8 +129,7 @@ public class SeleniumTest {
     @Test
     //Send a form (user option change, filling radio button)
     public void testChangeUserOption(){
-        UserPage userPage = loginAndOpenUserPage();
-        UserOptionPage userOptionPage = userPage.toOptionPage();
+        UserOptionPage userOptionPage = openUserOptionPage();
         //Change a user option and verify that it is applied correctly
         UserOptionPage userOptionPage2 = userOptionPage.selectMale();
         UserPage userPage2 = userOptionPage2.toUserPage();
@@ -147,8 +146,7 @@ public class SeleniumTest {
     @Test
     // test File Upload
     public void testUpload(){
-        UserPage userPage = loginAndOpenUserPage();
-        UserOptionPage userOptionPage = userPage.toOptionPage();
+        UserOptionPage userOptionPage = openUserOptionPage();
         assertNotEquals(userOptionPage.uploadAvatar(), null);
     }
 
@@ -172,5 +170,10 @@ public class SeleniumTest {
         LoginPage loginPage = mainPage.toLoginPage();
         UserPage userPage = loginPage.login("Selenium2", "Selenium2");
         return userPage;
+    }
+
+    public UserOptionPage openUserOptionPage(){
+        UserPage userPage = loginAndOpenUserPage();
+        return userPage.toOptionPage();
     }
 }
