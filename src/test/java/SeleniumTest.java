@@ -150,6 +150,12 @@ public class SeleniumTest {
         assertNotEquals(userOptionPage.uploadAvatar(), null);
     }
 
+    @Test
+    public void testBrowserBack(){
+        MainPage mainPage = new MainPage(driver);
+        assertTrue(mainPage.browserBack().contains("HowLongToBeat.com | Game Lengths, Backlogs and more!"));
+    }
+
     @After
     public void close() {
         if (driver != null) {

@@ -60,4 +60,11 @@ public class MainPage extends PageBase {
 
     }
 
+    public String browserBack(){
+        WebElement statsElement = waitAndReturnElement(toStatsPageLocator);
+        statsElement.click();
+        driver.navigate().back();
+        return driver.getTitle();
+    }
+
 }
