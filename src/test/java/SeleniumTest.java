@@ -137,6 +137,13 @@ public class SeleniumTest {
         assertTrue(userPage2.getGenderInfo().contains("Male"));
     }
 
+    @Test
+    // Hover test
+    public void testHover(){
+        MainPage mainPage = new MainPage(driver);
+        assertNotEquals(mainPage.buttonBackground(), mainPage.buttonHoverBackground());
+    }
+
     @After
     public void close() {
         if (driver != null) {
